@@ -53,6 +53,7 @@ class Detect(nn.Module):
         self.inplace = inplace  # use inplace ops (e.g. slice assignment)
 
     def forward(self, x):
+        fet = x
         z = []  # inference output
         for i in range(self.nl):
             x[i] = self.m[i](x[i])  # conv
@@ -74,7 +75,7 @@ class Detect(nn.Module):
                     y = torch.cat((xy, wh, conf), 4)
                 z.append(y.view(bs, -1, self.no))
 
-        return x if self.training else (torch.cat(z, 1),) if self.export else (torch.cat(z, 1), x)
+        return x if self.training else (torch.cat(z, 1),) if self.export else (torch.cat(z, 1), x, fet)
 
     def _make_grid(self, nx=20, ny=20, i=0, torch_1_10=check_version(torch.__version__, '1.10.0')):
         d = self.anchors[i].device
