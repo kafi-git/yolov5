@@ -146,6 +146,7 @@ if __name__ == '__main__':
     # Model
     model = _create(name=opt.model, pretrained=True, channels=3, classes=80, autoshape=True, verbose=True)
     # model = custom(path='path/to/model.pt')  # custom
+    print(model)
 
     # Images
     imgs = [
