@@ -204,7 +204,8 @@ def run(
 
         # Inference
         with dt[1]:
-            out, train_out = model(im) if compute_loss else (model(im, augment=augment), None)
+            out, train_out, fet = model(im) if compute_loss else (model(im, augment=augment), None)
+            print(fet)
 
         # Loss
         if compute_loss:
